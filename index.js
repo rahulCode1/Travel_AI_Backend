@@ -1,6 +1,5 @@
 import dotenv from "dotenv";
 dotenv.config();
-import axios from "axios";
 import OpenAi from "openai";
 import express from "express";
 import cors from "cors";
@@ -8,7 +7,6 @@ import cors from "cors";
 const app = express();
 const MODEL = "deepseek/deepseek-v3.2";
 const API_KEY = process.env.OPENROUTER_API_KEY;
-const API_URL = "https://openrouter.ai/api/v1/chat/completions";
 
 const client = new OpenAi({
   baseURL: "https://openrouter.ai/api/v1",
@@ -18,16 +16,20 @@ const client = new OpenAi({
 app.use(cors());
 app.use(express.json());
 
+
+
+
 const SYSTEM_PROMPT = `
 You are an AI travel agent. Your task is to generate structured travel recommendations.
 
 Return ONLY valid JSON. Do not include explanations, text, markdown, or formatting outside JSON.
-IMPORTANT: Your response must start with { and end with } no backticks.
-Follow this EXACT schema and field names:
+IMPORTANT: Your response must start with { and end with }, no backticks.
+
+Follow this EXACT schema:
 
 {
   "destination": "string (format: city, country)",
-  "best_time": "string (months or season + one short reason)",
+  "best_time": "string (months or season + short reason)",
   "duration_days": number,
   "top_attractions": ["string", "string", "string"],
   "sample_itinerary": [
@@ -38,58 +40,49 @@ Follow this EXACT schema and field names:
     "mid": number,
     "high": number
   },
+  "stays": [
+    {
+      "hotel_name": "string",
+      "rating": number,
+      "distance": number,
+      "price": number
+    },
+    {
+      "hotel_name": "string",
+      "rating": number,
+      "distance": number,
+      "price": number
+    },
+    {
+      "hotel_name": "string",
+      "rating": number,
+      "distance": number,
+      "price": number
+    }
+  ],
   "local_tips": ["string", "string"]
 }
 
 STRICT RULES:
 - Output must be valid JSON (parsable with JSON.parse)
+- Do NOT include markdown, backticks, or explanations
 - Do NOT include trailing commas
-- Do NOT include comments
 - Do NOT rename or add fields
 - Do NOT prose, markdown, or backticks
-- Ensure correct spelling of all keys (e.g., "sample_itinerary", "estimated_budget_eur")
-- Use integers for all numbers (no strings)
+- Use integers only (no decimals, no strings for numbers)
+- Ensure all keys are spelled exactly as defined
 - Provide at least 3 days in "sample_itinerary"
 - Keep arrays non-empty when possible
 - If data is unavailable, use null or []
 - IMPORTANT: Your response must start with { and end with } no backticks.
 
-QUALITY GUIDELINES: 
+QUALITY GUIDELINES:
 - Be realistic and geographically accurate
-- Keep descriptions concise but useful
+- Keep descriptions concise
 - Ensure itinerary flows logically day-by-day
-- Budget should reflect a per-person estimate in EUR
-
+- Budget must be per-person in EUR
+- Hotels should be realistic and near major attractions
 `;
-
-// const main = async () => {
-//   const res = await axios.post(
-//     API_URL,
-//     {
-//       model: MODEL,
-//       messages: [
-//         {
-//           role: "system",
-//           content: SYSTEM_PROMPT,
-//         },
-//         {
-//           role: "user",
-//           content: User_Prompt,
-//         },
-//       ],
-//     },
-//     {
-//       headers: {
-//         Authorization: `Bearer ${API_KEY}`,
-//         "Content-Type": "application/json",
-//       },
-//     },
-//   );
-
-//   console.log(res.data?.choices[0]?.message?.content);
-// };
-
-// main();
 
 const main = async () => {
   const res = await client.chat.completions.create({
@@ -150,7 +143,6 @@ Ensure the plan is realistic for the given number of days.
 
     const data = JSON.parse(sdkRes?.choices?.[0]?.message?.content);
     return res.json(data);
-   
   } catch (error) {
     console.log(error);
   }
