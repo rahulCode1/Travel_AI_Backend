@@ -65,13 +65,9 @@ const authCallback = async (req, res, next) => {
       { expiresIn: "30d" },
     );
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true, 
-      sameSite: "none", 
-    });
-
-    return res.redirect(`${process.env.FRONTEND_URL}/v1/profile/google`);
+    return res.redirect(
+      `${process.env.FRONTEND_URL}/v1/profile/google?token=${token}`,
+    );
   } catch (error) {
     next(error);
   }
@@ -79,15 +75,20 @@ const authCallback = async (req, res, next) => {
 
 const verifyUser = async (req, res, next) => {
   try {
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization;
 
-    if (!token) {
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return next(new HttpError("Token not found.", 401));
     }
+
+    const token = authHeader.split(" ")[1];
+
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
     res.json({
       success: true,
       token,
+      user: decoded,
     });
   } catch (error) {
     next(error);
