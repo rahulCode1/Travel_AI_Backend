@@ -6,7 +6,7 @@ import HttpError from "../model/error_model.js";
 import jwt from "jsonwebtoken";
 
 const authGoogle = (req, res) => {
-  const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.GOOGLE_CLIENT_ID}&redirect_uri=http://localhost:${process.env.PORT}/auth/google/callback&response_type=code&scope=profile email`;
+  const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.GOOGLE_CLIENT_ID}&redirect_uri=${process.env.BACKEND_URI}/auth/google/callback&response_type=code&scope=profile email`;
 
   res.redirect(googleAuthUrl);
 };
