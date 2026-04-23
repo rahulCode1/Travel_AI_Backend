@@ -28,7 +28,7 @@ const authCallback = async (req, res, next) => {
         client_secret: process.env.GOOGLE_CLIENT_SECRET,
         code,
         grant_type: "authorization_code",
-        redirect_uri: `http://localhost:80/auth/google/callback`,
+        redirect_uri: `${process.env.BACKEND_URI}/auth/google/callback`,
       },
       {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -75,8 +75,6 @@ const authCallback = async (req, res, next) => {
     next(error);
   }
 };
-
-
 
 const verifyUser = async (req, res, next) => {
   try {
