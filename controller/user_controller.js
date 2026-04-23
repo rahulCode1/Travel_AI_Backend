@@ -67,7 +67,7 @@ const authCallback = async (req, res, next) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
+      secure: true,
     });
 
     return res.redirect(`${process.env.FRONTEND_URL}/v1/profile/google`);
@@ -80,7 +80,14 @@ const verifyUser = async (req, res, next) => {
   try {
     const token = req.cookies.token;
 
-    res.json(token);
+    if (!token) {
+      return next(new HttpError("Token not found.", 401));
+    }
+
+    res.json({
+      success: true,
+      token,
+    });
   } catch (error) {
     next(error);
   }
