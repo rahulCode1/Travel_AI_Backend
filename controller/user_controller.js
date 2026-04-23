@@ -67,7 +67,8 @@ const authCallback = async (req, res, next) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true,
+      secure: true, 
+      sameSite: "none", 
     });
 
     return res.redirect(`${process.env.FRONTEND_URL}/v1/profile/google`);
