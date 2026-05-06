@@ -12,13 +12,29 @@ const app = express();
 
 initlizeDb();
 
+app.use(cors());
+const allowedOrigins = ["http://localhost:3000", process.env.FRONTEND_URL];
 
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL,
-    credentials: true, // ✅ ADD THIS
-  }),
-);
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+
+  if (allowedOrigins.includes(origin)) {
+    res.setHeaders("Access-Control-Allow-Origin", origin);
+  }
+
+  res.setHeaders(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+  );
+
+  res.setHeaders(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PATCH, PUT, DELETE OPTIONS",
+  );
+  next();
+});
+
+
 
 app.use(express.json());
 app.use(cookieParser());
