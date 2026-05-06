@@ -22,7 +22,7 @@ const createTrip = async (req, res, next) => {
       return next(new HttpError(errors.array()[0].msg, 400));
     }
 
-    const { destination, duration, budget } = req.query;
+    const { destination, duration, budget } = req.body;
 
     const USER_PROMPT = `
 Create a short travel plan for a first-time visitor.
@@ -158,7 +158,7 @@ const updateTrip = async (req, res, next) => {
     return next(new HttpError(errors.array()[0]?.msg));
   }
 
-  const { destination, duration, budget } = req.query;
+  const { destination, duration, budget } = req.body;
 
   const tripId = req.params.tripId;
 

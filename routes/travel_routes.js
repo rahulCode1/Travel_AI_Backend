@@ -20,8 +20,8 @@ import {
 const router = express.Router();
 
 
-router.get("/travel-planner", createTripValidation, createTrip);
-router.get("/update-trip/:tripId", tripIdValidation, auth_check, updateTrip);
+router.post("/travel-planner", createTripValidation, createTrip);
+router.post("/update-trip/:tripId", tripIdValidation, auth_check, updateTrip);
 router.get("/saved-trip", auth_check, getAllSavedTrips);
 router.get("/:tripId/trip-details", tripIdValidation, auth_check, tripDetails);
 router.post("/save-trip", saveTripValidation, auth_check, saveTrips);

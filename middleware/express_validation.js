@@ -1,14 +1,14 @@
 import { check, param, query } from "express-validator";
 
 const createTripValidation = [
-  query("destination").trim().notEmpty().withMessage("Destination required"),
-  query("duration")
+  check("destination").trim().notEmpty().withMessage("Destination required"),
+  check("duration")
     .notEmpty()
     .withMessage("Duration required.")
     .isInt({ min: 1 })
     .withMessage("Minimum duration 1 day."),
 
-  query("budget")
+  check("budget")
     .notEmpty()
     .withMessage("Budget required.")
     .isFloat({ min: 1 })
