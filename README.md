@@ -1,4 +1,4 @@
-# Trip planner
+# Trip planner API
 
 A REST API for an AI-powered trip planner application where users can generate, save, update, and manage travel plans. Built using Express.js, Node.js, MongoDB, JWT authentication, and Google OAuth 2.0.
 
