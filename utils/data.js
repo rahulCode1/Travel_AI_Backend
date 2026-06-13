@@ -14,12 +14,13 @@ Follow this EXACT schema:
   "sample_itinerary": [
     { "day": number, "plan": "string" }
   ],
- "estimated_budget_eur": {
+ "estimated_budget": {
       "low": number,
       "mid": number,
       "high": number
  },
- 
+ "currency_symbol": "string (currency symbol according to destination cuntry)",
+ "currency_value": "string (travel destination country 1 currency  equal to indian rupee, like $1 = 100₹),
 
   "stays": [
     {
@@ -54,6 +55,8 @@ STRICT RULES:
 - Ensure all keys are spelled exactly as defined
 - Provide at least 3 days in "sample_itinerary"
 - Keep arrays non-empty when possible
+- If travel destination have in india, then currency_value is 1 don't need to use like ₹1 = ₹1, if not then destination country 1 currency equal to indian rupee 
+- Currency conversion value must be present time currency value
 - If data is unavailable, use null or []
 - IMPORTANT: Your response must start with { and end with } no backticks.
 
@@ -61,7 +64,7 @@ QUALITY GUIDELINES:
 - Be realistic and geographically accurate
 - Keep descriptions concise
 - Ensure itinerary flows logically day-by-day
-- Budget must be per-person in EUR
+- Entered budget in Indian currency (₹), when assign budget to trip convert that amount into travel country currency
 - Hotels should be realistic and near major attractions
 - Distance in miles
 - Price breakdown match travel budget
@@ -88,11 +91,14 @@ Follow this EXACT schema:
   "sample_itinerary": [
     { "day": number, "plan": "string" }
   ],
- "estimated_budget_eur": {
+"estimated_budget": {
       "low": number,
       "mid": number,
       "high": number
  },
+ "currency_symbol": "string (currency symbol according to destination cuntry)",
+ "currency_value": "string (travel destination country 1 currency  equal to indian rupee, like $1 = 100₹),
+
  
 
   "stays": [
@@ -128,6 +134,8 @@ STRICT RULES
   - Ensure all keys are spelled exactly as definde
   - Provide at least 3 days in "sample itinerary"
   - Keep arrays non-empty when possible
+-  If travel destination have in india, then currency_value is 1 don't need to use like ₹1 = ₹1, if not then destination country 1 currency equal to indian rupee 
+- Currency conversion value must be present time currency value
   - If data is unavailable, use null or []
   - IMPORTANT: Your response must start with { and end with } no backticks.
 
@@ -135,7 +143,7 @@ QUALITY GUIDELINES:
 - Be realistic and geographically accurate
 - Keep descriptions concise
 - Ensure itinerary flows logically day-by-day
-- Budget must be per-person in EUR
+- Entered budget in Indian currency (₹), when assign budget to trip convert that amount into travel country currency
 - Hotels should be realistic and near major attractions
 - Distance in miles
 - Price breakdown match travel budget

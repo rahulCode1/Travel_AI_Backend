@@ -12,12 +12,14 @@ const travelSchema = new mongoose.Schema(
         plan: { type: String, required: true },
       },
     ],
-    estimated_budget_eur: {
+    estimated_budget: {
       low: { type: Number, required: true },
       mid: { type: Number, required: true },
       high: { type: Number, required: true },
     },
 
+    currency_symbol: { type: String, required: true },
+    currency_value: { type: String, required: true },
     stays: [
       {
         hotel_name: { type: String, required: true },

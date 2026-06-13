@@ -57,6 +57,8 @@ Ensure the plan is realistic for the given number of days.
 
     const data = JSON.parse(sdkRes?.choices?.[0]?.message?.content);
 
+   
+
     res.json({
       success: true,
       message: "Trip plan created successfully.",
@@ -73,6 +75,8 @@ const saveTrips = async (req, res, next) => {
   if (!errors.isEmpty()) {
     return next(new HttpError(errors.array()[0]?.msg, 400));
   }
+
+  console.log("Trip for save:", req.body)
 
   try {
     const userId = req.userId;

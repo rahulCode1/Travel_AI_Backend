@@ -59,23 +59,34 @@ const saveTripValidation = [
 
   // Estimated budget
   // Low
-  check("estimated_budget_eur.low")
+  check("estimated_budget.low")
     .notEmpty()
     .withMessage("Low budget required.")
     .isFloat({ min: 1 })
     .withMessage("Minimum low budget is 1."),
   // Mid
-  check("estimated_budget_eur.mid")
+  check("estimated_budget.mid")
     .notEmpty()
     .withMessage("Mid budget required.")
     .isFloat({ min: 1 })
     .withMessage("Medium low budget is 1."),
   // High
-  check("estimated_budget_eur.high")
+  check("estimated_budget.high")
     .notEmpty()
     .withMessage("High budget required.")
     .isFloat({ min: 1 })
     .withMessage("High low budget is 1."),
+
+  // Currency value
+  check("currency_value")
+    .trim()
+    .notEmpty()
+    .withMessage("currency value required"),
+  // Currency symbol
+  check("currency_symbol")
+    .trim()
+    .notEmpty()
+    .withMessage("currency symbol required"),
 
   // Stays
   check("stays").isArray({ min: 1 }).withMessage("At least 1 stay required."),
