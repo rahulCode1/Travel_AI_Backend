@@ -43,6 +43,9 @@ Ensure the plan is realistic for the given number of days.
 
     const sdkRes = await client.chat.completions.create({
       model: MODEL,
+      response_format: {
+        type: "json_object",
+      },
       messages: [
         {
           role: "system",
@@ -55,9 +58,10 @@ Ensure the plan is realistic for the given number of days.
       ],
     });
 
-    const data = JSON.parse(sdkRes?.choices?.[0]?.message?.content);
+    const content = sdkRes?.choices?.[0]?.message?.content;
+    const data = JSON.parse(content);
 
-   
+  
 
     res.json({
       success: true,
@@ -65,6 +69,7 @@ Ensure the plan is realistic for the given number of days.
       trip: data,
     });
   } catch (error) {
+  
     next(error);
   }
 };
@@ -75,8 +80,6 @@ const saveTrips = async (req, res, next) => {
   if (!errors.isEmpty()) {
     return next(new HttpError(errors.array()[0]?.msg, 400));
   }
-
-  console.log("Trip for save:", req.body)
 
   try {
     const userId = req.userId;

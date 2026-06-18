@@ -7,6 +7,8 @@ import initlizeDb from "./db/db.connect.js";
 import travelRoutes from "./routes/travel_routes.js";
 import authRoutes from "./routes/user_routes.js";
 import HttpError from "./model/error_model.js";
+import topDestinationRoutes from "./routes/top_destination_routes.js";
+
 
 const app = express();
 
@@ -34,13 +36,12 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
 app.use(express.json());
 app.use(cookieParser());
 
 app.use(authRoutes);
 app.use("/api", travelRoutes);
+app.use("/api/top-destination", topDestinationRoutes);
 
 app.use((req, res, next) => {
   return next(new HttpError("Route not found.", 404));

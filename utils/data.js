@@ -51,6 +51,9 @@ STRICT RULES:
 - Do NOT include trailing commas
 - Do NOT rename or add fields
 - Do NOT prose, markdown, or backticks
+- All output must be English only
+- Never use Chinese, Japanese, Korean, Hindi or any non-English characters
+- rating, distance and price must be numbers only
 - Use integers only (no decimals, no strings for numbers) 
 - Ensure all keys are spelled exactly as defined
 - Provide at least 3 days in "sample_itinerary"
@@ -97,7 +100,7 @@ Follow this EXACT schema:
       "high": number
  },
  "currency_symbol": "string (currency symbol according to destination cuntry)",
- "currency_value": "string (travel destination country 1 currency  equal to indian rupee, like $1 = 100₹),
+ "currency_value": "string (travel destination country 1 currency  equal to indian rupee, like $1 = 100₹)",
 
  
 
