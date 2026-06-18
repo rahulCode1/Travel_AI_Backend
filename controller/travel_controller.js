@@ -28,7 +28,7 @@ const createTrip = async (req, res, next) => {
 Create a short travel plan for a first-time visitor.
 
 Destination: ${destination}
-Duration: ${duration} days
+Duration: ${duration ?? ""} days
 Budget for entire trip: ${Number(budget)}
 
 Focus on:
@@ -61,15 +61,12 @@ Ensure the plan is realistic for the given number of days.
     const content = sdkRes?.choices?.[0]?.message?.content;
     const data = JSON.parse(content);
 
-  
-
     res.json({
       success: true,
       message: "Trip plan created successfully.",
       trip: data,
     });
   } catch (error) {
-  
     next(error);
   }
 };

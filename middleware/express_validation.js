@@ -2,17 +2,7 @@ import { check, param, query } from "express-validator";
 
 const createTripValidation = [
   check("destination").trim().notEmpty().withMessage("Destination required"),
-  check("duration")
-    .notEmpty()
-    .withMessage("Duration required.")
-    .isInt({ min: 1 })
-    .withMessage("Minimum duration 1 day."),
-
-  check("budget")
-    .notEmpty()
-    .withMessage("Budget required.")
-    .isFloat({ min: 1 })
-    .withMessage("Minimum budget is 1."),
+  
 ];
 
 const tripIdValidation = [

@@ -46,6 +46,9 @@ STRICT RULES:
 - Do NOT rename or add fields
 - Do NOT prose, markdown, or backticks
 - All output must be English only
+- If budget provided then plan trip according budget, if not you decide best budget for trip.
+- If duration (trip days) provided then plan trip according days, if not you plan trip days (<10 days trip)
+- Never use 0 budget for any trip
 - Never use Chinese, Japanese, Korean, Hindi or any non-English characters
 - rating, distance and price must be numbers only
 - Use integers only (no decimals, no strings for numbers) 
@@ -62,6 +65,9 @@ QUALITY GUIDELINES:
 - Keep descriptions concise
 - Ensure itinerary flows logically day-by-day
 - Entered budget in Indian currency (₹), when assign budget to trip convert that amount into travel country currency
+- If budget provided then plan trip according budget, if not you decide best budget for trip.
+- If duration (trip days) provided then plan trip according days, if not you plan trip days (<10 days trip)
+- Never use 0 budget for any trip
 - Hotels should be realistic and near major attractions
 - Distance in miles
 - Price breakdown match travel budget
