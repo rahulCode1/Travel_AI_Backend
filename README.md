@@ -6,18 +6,17 @@ A REST API for an AI-powered trip planner application where users can generate, 
 
 ## Demo Link
 
-[Live API](https://trip-planner-backend-five.vercel.app)
+[Live API](https://travel-ai-backend-lilac.vercel.app)
 
 ---
-
 
 ## Quick Start
 
 ```
 git clone https://github.com/rahulCode1/Travel_AI_Backend.git
-cd backend
-npm i
-npm run dev # or `npm start`
+cd Travel_AI_Backend
+npm install
+npm start
 
 ```
 
@@ -25,12 +24,12 @@ npm run dev # or `npm start`
 
 # Techonologies
 
-Node.js
-
+- Node.js
 - Express.js
 - MongoDB
 - JWT Authentication
 - Google OAuth 2.0
+- Cloudinary
 
 ---
 
@@ -58,6 +57,12 @@ Node.js
 - User sign in with google
 - Protected routes for save trip, view saved trips, view trip details, update & delete trip
 
+**Top Destinations**
+
+- View all top destinations
+- Add new destination
+- Edit and delete destination
+
 ---
 
 ## Environment Variables
@@ -71,6 +76,9 @@ GOOGLE_CLIENT_SECRET=GOXXXXXXXXXXX
 FRONTEND_URL=http://localhost:3000
 SECRET_KEY=XXXXXXX
 BACKEND_URI=http://localhost:80
+CLOUD_NAME=XXXXXXXX
+CLOUD_API_KEY=XXXXXXXXXX
+CLOUD_API_SECRET=XXXXXXXXXXX
 ```
 
 ---
@@ -138,6 +146,46 @@ Delete trip<br>
 ### **PATCH /api/:tripId/mark-complete** <br>
 
 Mark trip as complete<br>
+
+### **GET /api/top-destination** <br>
+
+Get all most visited destinations
+Sample response
+
+```
+[
+    {
+        id, destination, budget, days, imageUrl
+    },
+    ...
+]
+```
+
+### **POST /api/top-destination** <br>
+
+Add new destination
+Sample response
+
+```
+{
+    id, destination, budget, days, imageUrl
+}
+```
+
+### PATCH **/api/top-destination/:tripId** <br>
+
+Update destination
+Sample response
+
+```
+{
+    id, destination, budget, days
+}
+```
+
+### DELETE **/api/top-destination/:tripId** <br>
+
+Delete trip
 
 ### **GET /auth/google**<br>
 
